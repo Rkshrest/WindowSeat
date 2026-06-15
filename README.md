@@ -1,16 +1,57 @@
-# React + Vite
+# Window Seat?
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> *For someone who never stopped looking up.*
 
-Currently, two official plugins are available:
+This project is a personal, nostalgic flight tracker built out of a lifelong childhood obsession with aviation. Long before writing code, I was the kid staring out of airport windows, tracking aircraft, memorising airline routes, and always asking for the **window seat**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+`Window Seat?` is a complete identity shift from a generic developer flight tracking utility to an elegant, personal, and nostalgic journey tracker.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✈️ The Spirit
 
-## Expanding the ESLint configuration
+The question mark in **"Window Seat?"** is intentional. It represents the excitement before boarding, the curiosity before takeoff, and the quiet joy of following journeys in motion across our sky.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **Nostalgic & Personal**: Warm copywriting, elegant serif typography, and custom aviation window motifs.
+* **Minimal Airline Elegance**: Stripped-down premium styling inspired by airport departure boards and cabin windows.
+* **Apple Restraint**: No cluttered startup dashboards, no excessive gradients. Just clean travel data.
+
+---
+
+## 🛠️ Features
+
+* **Journey Tracking**: Search for live flight paths, status, gate/terminal info, and arrival times.
+* **Sky Radar**: Real-time departures board and status mapping.
+* **Saved Seats**: Bookmarks to follow frequent routes or plane journeys.
+* **Captain's Log**: Soft context and delay insights for each journey.
+* **Dawn-lit Cabin Window**: A nostalgic animated window illustration showing soft sky tones and airplane silhouettes.
+
+---
+
+## ⚙️ Setup & Commands
+
+To run this project locally, ensure you have Node.js installed.
+
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Run the local development server**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Build the production bundle**:
+   ```bash
+   npm run build
+   ```
+
+4. **Lint code**:
+   ```bash
+   npm run lint
+   ```
+
+---
+
+*“Look out the window. Follow journeys in motion.”*

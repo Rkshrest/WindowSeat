@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { History, Star, ArrowRight, Plane } from 'lucide-react';
+import { History, Bookmark, ArrowRight, Plane } from 'lucide-react';
 
 const UserSavedData = ({ recentSearches, favorites, onSelectFlight }) => {
   return (
@@ -11,7 +11,7 @@ const UserSavedData = ({ recentSearches, favorites, onSelectFlight }) => {
           <div className="p-2 bg-gray-100 rounded-lg text-gray-500">
             <History className="w-4 h-4" />
           </div>
-          <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">Recently Tracked</h3>
+          <h3 className="text-xs font-black uppercase tracking-widest text-gray-400">Recent Journeys</h3>
         </div>
         
         <div className="space-y-3">
@@ -50,9 +50,9 @@ const UserSavedData = ({ recentSearches, favorites, onSelectFlight }) => {
       <div className="space-y-6">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-primary-50 rounded-lg text-primary-600">
-            <Star className="w-4 h-4 fill-primary-600" />
+            <Bookmark className="w-4 h-4 fill-primary-600 text-primary-600" />
           </div>
-          <h3 className="text-xs font-black uppercase tracking-widest text-primary-600/50">My Bookmarks</h3>
+          <h3 className="text-xs font-black uppercase tracking-widest text-primary-600/50">Saved Seats</h3>
         </div>
 
         <div className="space-y-3">
@@ -83,8 +83,8 @@ const UserSavedData = ({ recentSearches, favorites, onSelectFlight }) => {
             ))
           ) : (
             <div className="p-8 border-2 border-dashed border-gray-100 rounded-[2rem] text-center">
-              <Star className="w-8 h-8 text-gray-100 mx-auto mb-3" />
-              <p className="text-xs font-bold text-gray-300 uppercase tracking-widest">No bookmarks yet</p>
+              <Bookmark className="w-8 h-8 text-gray-100 mx-auto mb-3" />
+              <p className="text-xs font-bold text-gray-300 uppercase tracking-widest">No saved seats yet</p>
             </div>
           )}
         </div>

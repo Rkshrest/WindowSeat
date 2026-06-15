@@ -13,9 +13,9 @@ const ErrorMessage = ({ message, onRetry }) => {
         <AlertCircle className="w-10 h-10" />
       </div>
       <div className="space-y-2">
-        <h3 className="text-2xl font-black text-red-900 dark:text-red-200 tracking-tight">Search Failed</h3>
+        <h3 className="text-2xl font-black text-red-900 dark:text-red-200 tracking-tight">Journey Not Found</h3>
         <p className="text-red-700 dark:text-red-400/80 font-medium leading-relaxed max-w-sm mx-auto">
-          {message || "We couldn't find any flight with that number. Please verify the code and try again."}
+          {message || "No flight found — try another route. Please verify the flight number and try again."}
         </p>
       </div>
       {onRetry && (

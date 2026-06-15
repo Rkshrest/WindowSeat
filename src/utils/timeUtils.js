@@ -1,4 +1,4 @@
-import { formatDistanceToNow, parseISO, isAfter, isBefore } from 'date-fns';
+import { formatDistanceToNow, isAfter } from 'date-fns';
 
 /**
  * Format human-readable time (e.g., "Departs in 2h 15m", "Arrived 30 mins ago")
@@ -20,7 +20,7 @@ export const formatHumanTime = (isoString, type = 'departure') => {
     } else {
       return type === 'departure' ? `Departed ${distance}` : `Arrived ${distance}`;
     }
-  } catch (e) {
+  } catch {
     return '';
   }
 };
@@ -35,7 +35,7 @@ export const calculateDelayMinutes = (scheduled, estimated) => {
     const e = new Date(estimated.replace(/\+00:00$/, ''));
     const diff = (e - s) / (1000 * 60);
     return Math.max(0, Math.round(diff));
-  } catch (e) {
+  } catch {
     return 0;
   }
 };
@@ -54,7 +54,7 @@ export const formatLocalTime = (isoString) => {
     const ampm = h >= 12 ? 'PM' : 'AM';
     const h12 = h % 12 || 12;
     return `${h12}:${minutes} ${ampm}`;
-  } catch (e) {
+  } catch {
     return '--:--';
   }
 };

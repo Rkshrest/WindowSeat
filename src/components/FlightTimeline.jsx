@@ -21,7 +21,7 @@ const FlightTimeline = ({ status, departureTime, arrivalTime, departureIata, arr
       const total = arr - dep;
       const current = now - dep;
       return Math.min(Math.max((current / total) * 100, 0), 100);
-    } catch (e) {
+    } catch {
       return 50;
     }
   }, [status, departureTime, arrivalTime, now]);

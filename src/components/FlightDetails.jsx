@@ -7,7 +7,7 @@ const FlightDetails = ({ flight }) => {
 
   const sections = [
     {
-      title: 'Aviation Intelligence',
+      title: 'Journey Details',
       items: [
         { label: 'Departure Delay', value: flight.departure?.delay ? `${flight.departure.delay} min` : 'None', icon: <Clock className="w-4 h-4" /> },
         { label: 'Baggage Claim', value: flight.arrival?.baggage || 'TBD', icon: <ShieldCheck className="w-4 h-4" /> },

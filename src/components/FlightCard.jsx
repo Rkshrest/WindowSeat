@@ -5,20 +5,20 @@ import FlightTimeline from './FlightTimeline';
 import { motion } from 'framer-motion';
 
 const FlightCard = ({ flight, onToggleDetails, onSaveFavorite, isFavorite = false }) => {
-  if (!flight) return null;
   const [saved, setSaved] = useState(isFavorite);
+  if (!flight) return null;
 
   const handleShare = () => {
-    const summary = `Tracking ${flight.airline} flight ${flight.flightNumber}. Currently ${flight.status === 'active' ? 'en route' : flight.status}. Arriving at ${flight.arrival.iata} @ ${flight.arrival.formattedTime}.`;
+    const summary = `Following ${flight.airline} flight ${flight.flightNumber} journey. Currently ${flight.status === 'active' ? 'en route' : flight.status}. Arriving at ${flight.arrival.iata} @ ${flight.arrival.formattedTime}.`;
     if (navigator.share) {
       navigator.share({
-        title: 'Flight Intelligence',
+        title: 'Journey Details',
         text: summary,
         url: window.location.href,
       }).catch(console.error);
     } else {
       navigator.clipboard.writeText(summary);
-      alert('Flight intelligence copied to clipboard!');
+      alert('Journey details copied to clipboard!');
     }
   };
 
@@ -65,11 +65,11 @@ const FlightCard = ({ flight, onToggleDetails, onSaveFavorite, isFavorite = fals
               <button 
                 onClick={handleSave}
                 className={`p-4 rounded-2xl transition-all border ${saved ? 'bg-primary-600 border-primary-500 text-white' : 'bg-white/5 border-white/5 text-white/60 hover:bg-white/10'}`}
-                title={saved ? "Remove from Favorites" : "Save to Favorites"}
+                title={saved ? "Remove Bookmark" : "Bookmark Seat"}
               >
                 <Star className={`w-5 h-5 ${saved ? 'fill-white' : ''}`} />
               </button>
-              <button onClick={handleShare} className="p-4 bg-white/5 hover:bg-white/10 rounded-2xl transition-all border border-white/5" title="Share Intel">
+              <button onClick={handleShare} className="p-4 bg-white/5 hover:bg-white/10 rounded-2xl transition-all border border-white/5" title="Share Journey">
                 <Share2 className="w-5 h-5 text-white/60" />
               </button>
             </div>
@@ -151,7 +151,7 @@ const FlightCard = ({ flight, onToggleDetails, onSaveFavorite, isFavorite = fals
              onClick={onToggleDetails}
              className="group flex items-center gap-4 px-10 py-5 bg-primary-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.25em] hover:bg-gray-900 transition-all shadow-[0_20px_40px_rgba(37,99,235,0.2)] hover:shadow-gray-200"
            >
-             Detailed Intelligence
+             Detailed Journey
              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
            </button>
         </div>

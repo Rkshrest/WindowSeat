@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
-import { Mail, Lock, ArrowRight, Shield, User } from 'lucide-react';
+import { Mail, Lock, ArrowRight } from 'lucide-react';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -39,11 +39,14 @@ const Signup = () => {
         className="w-full max-w-md bg-white rounded-[2.5rem] p-10 md:p-12 shadow-[0_40px_80px_rgba(0,0,0,0.03)] border border-gray-100"
       >
         <div className="flex flex-col items-center text-center mb-10">
-          <div className="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mb-6">
-            <User className="w-8 h-8 text-primary-600" />
+          <div className="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center mb-6 border border-primary-100 text-primary-600 shadow-sm">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="5" y="3" width="14" height="18" rx="6" />
+              <path d="M5 11h14" strokeWidth="1" strokeDasharray="2 2" opacity="0.4" />
+            </svg>
           </div>
           <h1 className="text-3xl font-black text-gray-900 tracking-tight mb-2">Create Account</h1>
-          <p className="text-gray-400 font-medium">Join the premium flight intelligence platform.</p>
+          <p className="text-gray-400 font-medium font-sans">Take your window seat. Follow journeys in motion.</p>
         </div>
 
         {error && (

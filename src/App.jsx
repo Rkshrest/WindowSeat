@@ -11,7 +11,7 @@ import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMessage';
 import UserSavedData from './components/UserSavedData';
 import { getFlightData } from './services/api';
-import { PlaneTakeoff, Shield } from 'lucide-react';
+import { Compass } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 // Auth & Firestore
@@ -20,6 +20,14 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { saveSearch, getRecentSearches, saveFavorite, getFavorites, removeFavorite } from './services/firestore';
+
+function getSeededValue(str, range, offset = 0) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return Math.abs(hash % range) + offset;
+}
 
 function Dashboard() {
   const { user } = useAuth();
@@ -30,22 +38,28 @@ function Dashboard() {
   const [showDetails, setShowDetails] = useState(false);
   const [recentSearches, setRecentSearches] = useState([]);
   const [favorites, setFavorites] = useState([]);
-
   // Fetch user data on mount
   useEffect(() => {
-    if (user) {
-      loadUserData();
-    }
+    if (!user) return;
+    
+    let active = true;
+    const loadData = async () => {
+      const [searches, favs] = await Promise.all([
+        getRecentSearches(user.uid),
+        getFavorites(user.uid)
+      ]);
+      if (active) {
+        setRecentSearches(searches);
+        setFavorites(favs);
+      }
+    };
+    
+    loadData();
+    
+    return () => {
+      active = false;
+    };
   }, [user]);
-
-  const loadUserData = async () => {
-    const [searches, favs] = await Promise.all([
-      getRecentSearches(user.uid),
-      getFavorites(user.uid)
-    ]);
-    setRecentSearches(searches);
-    setFavorites(favs);
-  };
 
   const handleSearch = useCallback(async (flightNumber) => {
     if (!flightNumber) return;
@@ -73,11 +87,11 @@ function Dashboard() {
         const updatedSearches = await getRecentSearches(user.uid);
         setRecentSearches(updatedSearches);
       } else {
-        setError("No flight found with that number. Please check for typos.");
+        setError("No flight found — try another route. Please check for typos.");
         setFlight(null);
       }
     } catch (err) {
-      setError(err.message || "Unable to fetch flight intelligence. Try again later.");
+      setError(err.message || "Unable to retrieve journey details. Let's try again in a moment.");
       setFlight(null);
     } finally {
       setIsLoading(false);
@@ -138,9 +152,9 @@ function Dashboard() {
         airline: flight.airline?.name
       },
       weather: {
-        condition: ['Clear', 'Partly Cloudy', 'Sunny'][Math.floor(Math.random() * 3)],
-        temp: Math.floor(Math.random() * (32 - 24) + 24),
-        humidity: Math.floor(Math.random() * (70 - 40) + 40),
+        condition: ['Clear', 'Partly Cloudy', 'Sunny'][getSeededValue(flight.flight?.iata || 'WS100', 3)],
+        temp: getSeededValue(flight.flight?.iata || 'WS100', 8, 24),
+        humidity: getSeededValue(flight.flight?.iata || 'WS100', 30, 40),
         visibility: '10km'
       }
     };
@@ -169,24 +183,24 @@ function Dashboard() {
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 text-primary-600 rounded-full text-[10px] font-black uppercase tracking-widest border border-primary-100 mb-2"
+            className="inline-flex items-center gap-2 px-4 py-1.5 bg-primary-50/50 text-primary-600 rounded-full text-[10px] font-bold uppercase tracking-widest border border-primary-100/50 mb-2"
           >
-             <Shield className="w-3 h-3" />
-             Live Intelligence Stream
+             <Compass className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '10s' }} />
+             Radar: Active
           </motion.div>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl font-black text-gray-900 tracking-tight"
+            className="text-6xl md:text-8xl font-black text-gray-900 tracking-tight leading-none"
           >
-            Track with <span className="text-primary-600">Precision.</span>
+            Window <span className="font-serif italic font-normal text-primary-600">Seat?</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-gray-500 text-lg max-w-xl mx-auto font-medium"
+            className="text-gray-400 text-lg max-w-xl mx-auto font-medium italic"
           >
-            Real-time status, gate updates, and arrival intelligence for flights worldwide.
+            For someone who never stopped looking up.
           </motion.p>
         </div>
 
@@ -231,12 +245,24 @@ function Dashboard() {
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex flex-col items-center justify-center py-24 text-center opacity-30"
+              className="flex flex-col items-center justify-center py-20 text-center"
             >
-               <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6">
-                 <PlaneTakeoff className="w-10 h-10 text-gray-400" />
+               <div className="relative w-40 h-56 bg-white border-8 border-gray-100 rounded-[3rem] shadow-inner overflow-hidden flex items-center justify-center mb-8">
+                 {/* Sky gradient background */}
+                 <div className="absolute inset-0 bg-gradient-to-b from-[#e0f2fe] via-[#bae6fd] to-[#fed7aa]" />
+                 {/* Soft clouds */}
+                 <div className="absolute w-24 h-12 bg-white/40 blur-md rounded-full -bottom-2 -left-4" />
+                 <div className="absolute w-32 h-16 bg-white/30 blur-lg rounded-full -bottom-6 -right-6" />
+                 {/* Stylized airplane silhouette */}
+                 <svg className="w-10 h-10 text-white/80 drop-shadow-md relative z-10 transform -rotate-12 animate-pulse" viewBox="0 0 24 24" fill="currentColor">
+                   <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5L21 16z" />
+                 </svg>
+                 {/* Window pane reflection/border gloss */}
+                 <div className="absolute inset-0 border border-white/20 rounded-[2.5rem] pointer-events-none" />
                </div>
-               <p className="text-gray-500 font-black text-xl tracking-tight uppercase">Search for a flight to get real-time updates</p>
+               <p className="text-gray-500 font-medium text-lg max-w-sm">
+                 Look out the window. Search for a flight to see its journey in motion.
+               </p>
             </motion.div>
           )}
 
@@ -250,7 +276,7 @@ function Dashboard() {
 
       <footer className="py-12 text-center border-t border-gray-100 bg-white">
          <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">
-           build by shrest sharma
+           built with wonder by shrest sharma
          </p>
       </footer>
     </div>

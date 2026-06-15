@@ -42,7 +42,7 @@ const FlightInsight = ({ delay, summary }) => {
           <div className="p-2 bg-white rounded-lg shadow-sm">
             <Info className="w-4 h-4 text-gray-500" />
           </div>
-          <h3 className="font-bold text-gray-900 tracking-tight">Flight Insight</h3>
+          <h3 className="font-bold text-gray-900 tracking-tight">Captain's Log</h3>
         </div>
         <div className={`flex items-center gap-2 px-3 py-1 rounded-full bg-white border ${delayInfo.borderColor} ${delayInfo.color} text-xs font-black uppercase tracking-widest`}>
           {delayInfo.icon}

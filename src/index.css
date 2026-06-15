@@ -13,7 +13,8 @@
   --color-primary-900: #0c4a6e;
   --color-primary-950: #082f49;
 
-  --font-sans: "Inter", "SF Pro Display", "system-ui", "sans-serif";
+  --font-sans: "Outfit", "Inter", "SF Pro Display", "system-ui", "sans-serif";
+  --font-serif: "Playfair Display", "Georgia", "serif";
 
   --animate-fade-in: fadeIn 0.5s ease-out forwards;
   --animate-slide-up: slideUp 0.5s ease-out forwards;

@@ -26,7 +26,12 @@ const SearchBar = ({ onSearch, isLoading, recentSearches }) => {
   }, [query, onSearch]);
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-6">
+    <div className="w-full max-w-2xl mx-auto space-y-3">
+      <div className="text-center">
+        <label className="text-[11px] font-black text-primary-600/70 uppercase tracking-[0.25em] block mb-2">
+          Where are we flying today?
+        </label>
+      </div>
       <form onSubmit={handleSubmit} className="relative group">
         <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
           <Search className="h-5 w-5 text-gray-400 group-focus-within:text-primary-600 transition-colors" />
@@ -35,20 +40,20 @@ const SearchBar = ({ onSearch, isLoading, recentSearches }) => {
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Flight number (e.g., 6E 6406)"
-          className="block w-full pl-16 pr-36 py-5 bg-white border border-gray-200 rounded-2xl text-lg font-medium placeholder-gray-400 focus:outline-none focus:border-primary-500 transition-all shadow-sm"
+          placeholder="Enter flight number (e.g., AA100)"
+          className="block w-full pl-16 pr-44 py-5 bg-white border border-gray-200 rounded-2xl text-lg font-medium placeholder-gray-400 focus:outline-none focus:border-primary-500 transition-all shadow-sm"
           disabled={isLoading}
         />
         <div className="absolute inset-y-2 right-2 flex items-center">
           <button
             type="submit"
             disabled={isLoading || !query.trim()}
-            className="flex items-center gap-2 h-full px-8 bg-primary-600 text-white font-bold rounded-xl hover:bg-primary-700 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-all"
+            className="flex items-center gap-2 h-full px-6 bg-primary-600 text-white font-bold rounded-xl hover:bg-primary-700 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-all text-sm"
           >
             {isLoading ? (
               <Loader2 className="w-5 h-5 animate-spin" />
             ) : (
-              'Track'
+              'Find Journey'
             )}
           </button>
         </div>

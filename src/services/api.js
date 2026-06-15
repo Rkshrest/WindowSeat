@@ -15,7 +15,6 @@ const apiClient = axios.create({
  */
 export const getFlightData = async (flightNumber) => {
   const cleanNumber = flightNumber.replace(/\s/g, '').toUpperCase();
-  const today = new Date().toISOString().split('T')[0];
   
   try {
     const response = await apiClient.get('/flights', {
